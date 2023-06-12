@@ -1,6 +1,5 @@
 <resources>
     <string name="app_name">Ass1</string>
-    <string name="txt_chaomungban">Chào Mừng Bạn Trở Lại</string>
     <string name="txt_dangkytaikhoan">Đăng Ký Tài Khoản</string>
     <string name="txt_nhapusername">Nhập Username </string>
     <string name="txt_nhappassword">Nhập mật khẩu</string>

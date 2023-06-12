@@ -10,49 +10,52 @@ import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 
 public class dangky extends AppCompatActivity {
-    public static String Nam = "user_name";
-    public static String Nhap = "passwork";
+    public static String KEY_USERNAME = "username";
+    public static String KEY_PASSWORD = "password";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.dangky);
-        Button btnLogin = findViewById(R.id.btn_login);
+        Button btnRegister = findViewById(R.id.btndangky);
         Button btntv = findViewById(R.id.btntrove);
 
-        EditText edtUsername = findViewById(R.id.edt_username);
-        EditText edtPassword = findViewById(R.id.edt_password);
+        EditText edtUsername = findViewById(R.id.edtUsername);
+        EditText edtPassword = findViewById(R.id.edtPassWord);
         EditText edtRetypePassword = findViewById(R.id.edtlaiPassWord);
 
-        btnLogin.setOnClickListener(new View.OnClickListener() {
+        btnRegister.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                // validate o nhap trong, password nhap lai dung
-                String sUserName = edtUsername.getText().toString();
-                String sPassword = edtPassword.getText().toString();
-                String sRetypePass = edtRetypePassword.getText().toString();
-
-                if (sUserName == null || sUserName.trim().equals("")) {
-                    Toast.makeText(getApplicationContext(), "Can nhap ten!", Toast.LENGTH_SHORT).show();
-                } else if (sPassword == null || sPassword.trim().equals("")) {
-                    Toast.makeText(getApplicationContext(), "Can nhap mat khau!", Toast.LENGTH_SHORT).show();
-                } else if (sRetypePass == null || sRetypePass.trim().equals("")) {
-                    Toast.makeText(getApplicationContext(), "Can nhap lai mat khau!", Toast.LENGTH_SHORT).show();
-                } else if (!sRetypePass.equals(sPassword)) {
-                    Toast.makeText(getApplicationContext(), "mat khai nhap lai chua dung!", Toast.LENGTH_SHORT).show();
+                String username = edtUsername.getText().toString();
+                String password = edtPassword.getText().toString();
+                String nhaplai = edtRetypePassword.getText().toString();
+                if (username.trim().isEmpty()) {
+                    Toast.makeText(dangky.this, "Vui long nhap username", Toast.LENGTH_SHORT).show();
+                } else if (password.trim().isEmpty()) {
+                    Toast.makeText(dangky.this, "Vui long nhap password", Toast.LENGTH_SHORT).show();
+                } else if (nhaplai.trim().isEmpty()) {
+                    Toast.makeText(dangky.this, "Vui long nhap lai password", Toast.LENGTH_SHORT).show();
+                } else if (!nhaplai.equals(password)) {
+                    Toast.makeText(dangky.this, "Password nhap lai khong khop", Toast.LENGTH_SHORT).show();
                 } else {
-                    Intent intent = new Intent(getApplicationContext(), dangnhap.class);
-
-                    intent.putExtra(Nam, sUserName);
-                    intent.putExtra(Nhap, sPassword);
-
-                    intent.putExtra("number", 18);
-
+                    Intent intent = new Intent(dangky.this, dangnhap.class);
+                    Bundle bundle = new Bundle();
+                    bundle.putString(KEY_USERNAME, username);
+                    bundle.putString(KEY_PASSWORD, password);
+                    intent.putExtras(bundle);
                     startActivity(intent);
                 }
 
             }
         });
 
+        btntv.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(dangky.this, dangnhap.class);
+                startActivity(intent);
+            }
+        });
     }
 }
